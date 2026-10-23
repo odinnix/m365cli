@@ -109,6 +109,8 @@ New-ManagementRoleAssignment -App <enterprise-app-object-id> -Role "Application 
 New-ManagementRoleAssignment -App <enterprise-app-object-id> -Role "Application Calendars.ReadWrite" -CustomResourceScope "m365cli scope"
 # Phase 2 (contacts):
 New-ManagementRoleAssignment -App <enterprise-app-object-id> -Role "Application Contacts.ReadWrite"  -CustomResourceScope "m365cli scope"
+# Optional, for `m365 mail categories` (listing the mailbox's Outlook categories):
+New-ManagementRoleAssignment -App <enterprise-app-object-id> -Role "Application MailboxSettings.Read" -CustomResourceScope "m365cli scope"
 ```
 
 > `Application Mail.ReadWrite` does **not** include sending — `Application
@@ -253,6 +255,8 @@ confirms the full chain.
 | Mail send | `Mail.Send` | RBAC role `Application Mail.Send`, scoped |
 | Calendar | `Calendars.ReadWrite` | RBAC role `Application Calendars.ReadWrite`, scoped |
 | Contacts | `Contacts.ReadWrite` | RBAC role `Application Contacts.ReadWrite`, scoped |
+| Mail folders, move, categorize, mark | `Mail.ReadWrite` | Same RBAC role as mail read/write, scoped |
+| Outlook category list (`mail categories`) | `MailboxSettings.Read` | RBAC role `Application MailboxSettings.Read`, scoped |
 | SharePoint/OneDrive | `Sites.Selected` | Entra consent + per-site/per-drive grant (a OneDrive is a personal site) |
 | Single folders/files (optional) | `Files.SelectedOperations.Selected`, `Lists.SelectedOperations.Selected` | Entra consent + per-item grant |
 

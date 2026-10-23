@@ -100,6 +100,7 @@ in **[docs/ews-setup.md](docs/ews-setup.md)**.
 m365 doctor    [--live]                                     # config + token health
 m365 mail      list read search send draft reply
                attachments get-attachment
+               folders categories move categorize mark      # organize existing mail
                watch poll                                   # scoped by allowed_mailboxes
 m365 calendar  list get create update delete
                freebusy find-times                          # scoped by allowed_mailboxes

@@ -25,6 +25,8 @@ func newMailCmd() *cobra.Command {
 		newMailListCmd(), newMailReadCmd(), newMailSearchCmd(),
 		newMailSendCmd(), newMailDraftCmd(), newMailReplyCmd(),
 		newMailAttachmentsCmd(), newMailGetAttachmentCmd(), newMailWatchCmd(),
+		newMailFoldersCmd(), newMailCategoriesCmd(), newMailMoveCmd(),
+		newMailCategorizeCmd(), newMailMarkCmd(),
 	)
 	return mail
 }

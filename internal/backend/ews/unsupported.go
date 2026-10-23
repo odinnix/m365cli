@@ -5,6 +5,7 @@ import (
 
 	"github.com/MakersLab-ai/m365cli/internal/backend"
 	"github.com/MakersLab-ai/m365cli/internal/contacts"
+	"github.com/MakersLab-ai/m365cli/internal/mail"
 )
 
 // The contacts, drive and site domains are not implemented for EWS. Contacts is
@@ -52,5 +53,21 @@ func (siteSvc) Items(context.Context, string, string) ([]byte, error) {
 	return nil, backend.ErrUnsupported
 }
 func (siteSvc) Download(context.Context, string, string) ([]byte, error) {
+	return nil, backend.ErrUnsupported
+}
+
+// Folder listing, categories, moving and organizing messages are implemented
+// for Graph only so far; on EWS they report backend.ErrUnsupported.
+
+func (mailSvc) Folders(context.Context, string) ([]byte, error) {
+	return nil, backend.ErrUnsupported
+}
+func (mailSvc) MasterCategories(context.Context, string) ([]byte, error) {
+	return nil, backend.ErrUnsupported
+}
+func (mailSvc) Move(context.Context, string, string, string) ([]byte, error) {
+	return nil, backend.ErrUnsupported
+}
+func (mailSvc) Organize(context.Context, string, string, mail.Change) ([]byte, error) {
 	return nil, backend.ErrUnsupported
 }

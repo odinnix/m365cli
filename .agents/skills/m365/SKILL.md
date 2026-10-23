@@ -154,6 +154,34 @@ before sending — without it, a reply to recipients that are all inside
 `send_allow` goes out immediately. The draft keeps what Outlook's own "Reply
 All" keeps: the quoted thread below the answer, its inline images, HTML body.
 
+## Organizing Mail
+
+Folders, categories, read state and follow-up flags change without touching the
+message content. Every command takes one or more message ids and reports one
+result per id (it exits non-zero if any failed). Graph only; EWS reports
+"not supported".
+
+```bash
+m365 mail folders --json              # every folder, nested ones included, with its path
+m365 mail categories --json           # the mailbox's Outlook categories (name, color)
+
+# Move: a well-known name (inbox, archive, deleteditems, junkemail, drafts,
+# sentitems), a path like Inbox/Clients/Acme, a unique folder name, or an id.
+# Ambiguous names are refused with every matching path.
+m365 mail move <message-id> <message-id> --folder Inbox/Clients --json
+# → each result carries the moved message's NEW id (Graph re-ids on move)
+
+m365 mail categorize <message-id> --add Clients --add "Follow up" --json
+m365 mail categorize <message-id> --remove "Follow up" --json
+m365 mail categorize <message-id> --clear --add Done --json   # set exactly
+m365 mail mark <message-id> --read --json
+m365 mail mark <message-id> --unread --flag --json            # or --complete / --unflag
+```
+
+Use existing category names from `m365 mail categories`: a new name is applied
+to the message but has no color until someone creates it in Outlook. Moving to
+`deleteditems` is a delete from the user's point of view; confirm first.
+
 ## Discovery
 
 ```bash

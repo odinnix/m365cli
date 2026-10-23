@@ -89,6 +89,20 @@ type MailService interface {
 	// deltaLink/cursor). Its signature matches watch.GraphDelta so MailService
 	// satisfies the watch port directly.
 	MailboxDelta(ctx context.Context, mailbox, urlOrCursor string) ([]byte, error)
+
+	// Folders lists the mailbox's mail folders, nested folders included, each
+	// with its slash-separated path from the top (e.g. "Inbox/Clients").
+	Folders(ctx context.Context, mailbox string) ([]byte, error)
+	// MasterCategories lists the mailbox's Outlook categories (name and color).
+	MasterCategories(ctx context.Context, mailbox string) ([]byte, error)
+	// Move moves a message to a folder given as a well-known name (inbox,
+	// archive, deleteditems, junkemail, drafts, sentitems), a folder path or
+	// unique display name, or a folder id. It returns the moved message's id and
+	// folder: a moved message gets a new id.
+	Move(ctx context.Context, mailbox, id, folder string) ([]byte, error)
+	// Organize changes a message's categories, read state and follow-up flag,
+	// and returns the resulting id, categories, isRead and flag.
+	Organize(ctx context.Context, mailbox, id string, change mail.Change) ([]byte, error)
 }
 
 // CalListOpts selects either a plain event list or a calendarView time window.

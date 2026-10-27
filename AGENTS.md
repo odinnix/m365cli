@@ -54,3 +54,8 @@
 - Unit tests use stdlib `testing` + `httptest` (no live tenant needed).
 - Live end-to-end requires a real Azure app + tenant; see `docs/azure-setup.md`
   and verify with `m365 doctor --live`.
+
+## Branches and local verification
+
+- Stay on the current branch. Switch branches only when explicitly instructed or when other in-progress work requires it.
+- Running applications locally and interacting with them is always safe. Before reporting work complete, confirm each affected application builds, starts, and runs; for anything with a browser UI, test the change in a browser.
